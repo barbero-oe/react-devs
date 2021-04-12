@@ -7,7 +7,7 @@ import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import {Provider} from "./infrastructure/Provider";
 import axios, {AxiosInstance} from "axios";
-import {fetchContributors} from "./infrastructure/GitHubService";
+import {fetchContributors, searchRepositories} from "./infrastructure/GitHubService";
 
 const axiosInstance: AxiosInstance = axios.create({
     baseURL: 'https://api.github.com',
@@ -15,7 +15,9 @@ const axiosInstance: AxiosInstance = axios.create({
 })
 
 const provider = new Provider([
-    ['fetch-contributors', (owner, name) => fetchContributors(axiosInstance, owner, name)]])
+    ['fetch-contributors', (name) => fetchContributors(axiosInstance, name)],
+    ['fetch-repositories', (search) => searchRepositories(axiosInstance, search)],
+])
 export const IoCContext = React.createContext(provider)
 
 export default function App() {

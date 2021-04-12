@@ -4,7 +4,7 @@ import {useRoute} from "@react-navigation/native";
 import {IoCContext} from "../App";
 
 const renderContributor: ListRenderItem<Contributor> = ({item}) =>
-    <View>
+    <View style={{margin: 10}}>
         <Text>{item.user}</Text>
     </View>
 
@@ -20,8 +20,8 @@ export interface ContributorsProps {
 export const ContributorsScreen: React.FC = () => {
     const provider = useContext(IoCContext)
     const [contributors, setContributors] = useState<Contributor[]>([])
-    const {owner, name} = useRoute().params;
-    useEffect(() => provider.showContributors(owner, name, setContributors), [owner, name])
+    const {name} = useRoute().params;
+    useEffect(() => provider.showContributors(`${name}`, setContributors), [name])
     return <Contributors contributors={contributors}/>
 }
 

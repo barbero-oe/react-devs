@@ -5,16 +5,15 @@ import {ColorSchemeName} from 'react-native';
 
 import NotFoundScreen from '../screens/NotFoundScreen';
 import {RootStackParamList} from '../types';
-import LinkingConfiguration from './LinkingConfiguration';
 import {Main} from "../screens/Main";
 import {ContributorsScreen} from "../screens/Contributors";
+import {RepositoriesScreen} from "../screens/Repositories";
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
 export default function Navigation({colorScheme}: { colorScheme: ColorSchemeName }) {
     return (
         <NavigationContainer
-            linking={LinkingConfiguration}
             theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
             <RootNavigator/>
         </NavigationContainer>
@@ -27,9 +26,10 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
     return (
-        <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Navigator screenOptions={{headerShown: true}}>
             <Stack.Screen name="Main" component={Main}/>
             <Stack.Screen name="Contributors" component={ContributorsScreen}/>
+            <Stack.Screen name="Repositories" component={RepositoriesScreen}/>
             <Stack.Screen name="NotFound" component={NotFoundScreen} options={{title: 'Oops!'}}/>
         </Stack.Navigator>
     );

@@ -23,7 +23,7 @@ it('should transform service info of the contributors', async () => {
     const provider = new Provider([['fetch-contributors', () => contributors]])
     const show = jest.fn()
 
-    await provider.showContributors('facebook', 'react', show)
+    await provider.showContributors('facebook/react', show)
 
     expect(show).toHaveBeenCalledWith(expect.arrayContaining([
         expect.objectContaining({id: 0, user: 'user-0'}),
